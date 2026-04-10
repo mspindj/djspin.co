@@ -2,9 +2,9 @@ import { useLang } from '../context/LanguageContext'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const releases = [
-  { title: 'Into Your Spell EP', type: 'EP', year: '2023' },
-  { title: "Don't Know Yet EP", type: 'EP', year: '2022' },
-  { title: 'Play Tha Bass EP', type: 'EP', year: '2021' },
+  { title: 'Into Your Spell EP', type: 'EP', year: '2023', cover: '/images/cover-into-your-spell.jpg' },
+  { title: "Don't Know Yet EP", type: 'EP', year: '2022', cover: '/images/cover-dont-know-yet.jpg' },
+  { title: 'Play Tha Bass EP', type: 'EP', year: '2021', cover: '/images/cover-play-tha-bass.jpg' },
 ]
 
 const tracks = [
@@ -39,15 +39,13 @@ export default function Music() {
               rel="noopener noreferrer"
               className="glass float rounded-lg p-6 group cursor-pointer"
             >
-              <div className="aspect-square bg-bg-surface rounded-md mb-4 flex items-center justify-center overflow-hidden">
-                <div className="text-center">
-                  <div className="font-display text-2xl tracking-[0.05em] text-text-muted group-hover:text-accent transition-colors duration-300">
-                    SPIN
-                  </div>
-                  <div className="text-xs text-text-muted mt-1 tracking-widest uppercase">
-                    {release.type}
-                  </div>
-                </div>
+              <div className="aspect-square rounded-md mb-4 overflow-hidden">
+                <img
+                  src={release.cover}
+                  alt={release.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
               </div>
               <h3 className="font-medium text-lg mb-1 group-hover:text-accent transition-colors duration-300">
                 {release.title}
