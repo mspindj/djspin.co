@@ -37,9 +37,13 @@ export default function Navbar() {
         <a
           href="#home"
           onClick={(e) => { e.preventDefault(); handleClick('#home') }}
-          className="font-display text-2xl tracking-[0.1em] text-text-primary hover:text-accent transition-colors"
+          className="hover:opacity-80 transition-opacity"
         >
-          SPIN
+          <img
+            src="/images/spin-logo.png"
+            alt="Spin"
+            className="h-8 w-auto"
+          />
         </a>
 
         {/* Desktop Links */}

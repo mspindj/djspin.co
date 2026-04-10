@@ -42,8 +42,12 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <h1 className="font-display text-7xl md:text-9xl tracking-[0.12em] mb-6 animate-[fadeUp_1s_ease-out_0.2s_both]">
-          SPIN
+        <h1 className="mb-6 animate-[fadeUp_1s_ease-out_0.2s_both]">
+          <img
+            src="/images/spin-logo.png"
+            alt="Spin"
+            className="h-28 md:h-40 w-auto mx-auto"
+          />
         </h1>
 
         <p className="text-lg md:text-xl tracking-[0.2em] uppercase text-text-secondary font-light mb-3 animate-[fadeUp_1s_ease-out_0.4s_both]">

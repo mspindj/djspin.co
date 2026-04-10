@@ -6,8 +6,8 @@ export default function Footer() {
   return (
     <footer className="py-12 px-6 border-t border-border-subtle">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <a href="#home" className="font-display text-xl tracking-[0.1em] text-text-muted hover:text-text-primary transition-colors">
-          SPIN
+        <a href="#home" className="hover:opacity-80 transition-opacity">
+          <img src="/images/spin-logo.png" alt="Spin" className="h-6 w-auto opacity-50 hover:opacity-80 transition-opacity" />
         </a>
 
         <div className="flex items-center gap-6">
