@@ -79,16 +79,16 @@ export default function Music() {
           </div>
         </div>
 
-        {/* SoundCloud Embed */}
+        {/* SoundCloud Playlist - Deepsidency */}
         <div className="glass rounded-lg p-4 mb-8">
           <iframe
             width="100%"
-            height="166"
+            height="450"
             scrolling="no"
             frameBorder="no"
             allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/mspindj&color=%23eb3e34&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"
-            title="SoundCloud Player"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2034528036&color=%23eb3e34&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=true"
+            title="Deepsidency - Spin"
           />
         </div>
 
