@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "home": "Home",
+    "music": "Music",
+    "story": "Story",
+    "gallery": "Gallery",
+    "contact": "Contact"
+  },
+  "hero": {
+    "tagline": "House. Deep. Progressive.",
+    "subtitle": "+20 years crafting sonic narratives",
+    "cta_listen": "Listen",
+    "cta_bookings": "Bookings"
+  },
+  "music": {
+    "title": "Music",
+    "subtitle": "Official releases, sonic explorations and live sessions",
+    "listen_on": "Listen on",
+    "support": "Support on Bandcamp",
+    "latest": "Latest"
+  },
+  "story": {
+    "title": "Story",
+    "name": "Miguel Espinosa a.k.a. Spin",
+    "bio_1": "DJ and sound curator with over 20 years in the electronic music scene. Specializing in house, deep and progressive, with a focus on the emotional narrative of sound.",
+    "bio_2": "From Bogota, Colombia, Spin has built a career defined by elegant and carefully curated sets, performing at the leading clubs and festivals in the Colombian scene.",
+    "bio_3": "His sound is characterized by deep layers, hypnotic progressions and a selection that connects with the dance floor on a visceral level.",
+    "location": "Bogota, Colombia",
+    "years": "+20 years",
+    "genres": "House / Deep / Progressive"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "Moments from the booth and behind the scenes"
+  },
+  "contact": {
+    "title": "Bookings",
+    "subtitle": "For bookings, press or other inquiries",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "subject_booking": "Booking",
+    "subject_press": "Press",
+    "subject_other": "Other",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending...",
+    "success": "Message sent. I'll get back to you soon.",
+    "error": "Failed to send. Please try again."
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  }
+}
