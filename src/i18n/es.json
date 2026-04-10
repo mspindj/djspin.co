@@ -4,27 +4,47 @@
     "music": "Música",
     "story": "Historia",
     "gallery": "Galería",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "deepsidency": "Deepsidency",
+    "nowhere": "Nowhere Traveler"
   },
   "hero": {
     "tagline": "House. Deep. Progressive.",
-    "subtitle": "+20 años creando narrativas sonoras",
+    "subtitle": "+20 años de narrativa sonora elegante",
     "cta_listen": "Escuchar",
     "cta_bookings": "Bookings"
   },
   "music": {
     "title": "Música",
-    "subtitle": "Releases, exploraciones sonoras y sesiones en vivo",
+    "subtitle": "Releases, sets curados y sesiones en vivo",
     "listen_on": "Escuchar en",
     "support": "Apoyar en Bandcamp",
     "latest": "Lo más reciente"
   },
+  "deepsidency": {
+    "title": "Deepsidency",
+    "subtitle": "Serie mensual de sets curados. Sonido de club, independiente y auténtico.",
+    "description": "Deepsidency es más que una serie de sets: es una residencia mental que se reinventa cada mes. House profundo, techno melódico y progressive hipnótico, tejidos en una narrativa que se mueve sin apuro. Cada episodio es una curaduría pensada para oídos que buscan algo más que velocidad.",
+    "audience": "Para quienes ya no salen cada fin de semana, pero cuando lo hacen, lo hacen con intención.",
+    "cta": "Escuchar Deepsidency"
+  },
+  "nowhere": {
+    "title": "Nowhere Traveler",
+    "badge": "Live",
+    "subtitle": "Sin mapa. Solo movimiento.",
+    "description": "Nowhere Traveler es el acto en vivo que nace después de dos décadas detrás de los platos. Sintetizadores, loops en tiempo real y texturas atmosféricas que se componen, transforman y descomponen en directo. Cada presentación es única: un diario de viaje sonoro entre lo club y lo contemplativo.",
+    "quote": "No hay destino. Hay trayectos emocionales.",
+    "pillars_title": "El viaje",
+    "pillar_sonic": "Deep, progressive y electrónica entre 118-126 BPM. Texturas granuladas, pads largos, bajos cálidos y percusión minimalista con groove.",
+    "pillar_performative": "Estructura modular del show. Improvisación dirigida con ganchos melódicos que vuelven como anclas.",
+    "pillar_visual": "Cartografías rotas, líneas topográficas glitcheadas. Visuales reactivos al audio en tiempo real."
+  },
   "story": {
     "title": "Historia",
     "name": "Miguel Espinosa a.k.a. Spin",
-    "bio_1": "DJ y curador sonoro con más de 20 años en la escena electrónica. Se mueve entre el house, el deep y el progressive, siempre buscando que el sonido cuente algo.",
-    "bio_2": "Desde Bogotá, ha construido una carrera a punta de sets elegantes y bien curados, tocando en los clubes y festivales que importan en Colombia.",
-    "bio_3": "Su sonido tiene capas profundas, progresiones que hipnotizan y una selección que conecta con la pista a un nivel visceral.",
+    "bio_1": "DJ y curador sonoro con más de 20 años en la escena electrónica. No soy un DJ de hits: soy un narrador de emociones, alguien que cree que la música no se impone, sino que se insinúa.",
+    "bio_2": "Cada set es una sesión de curaduría emocional, donde el tempo, la textura y la energía dialogan con el público en tiempo real. Desde espacios underground hasta eventos boutique, mi propuesta se adapta pero siempre mantiene una identidad profunda: sonido envolvente, groove elegante, progresión sutil.",
+    "bio_3": "He tocado en Baum, Billares Londres, Octava, Radio Berlín y el Hotel W en Bogotá. En Barcelona, en City Hall, Macarena y el W. En Ibiza, en directo desde Ibiza Global Radio. En Ciudad de México en AM y la Expo DJ World Conference.",
     "location": "Bogotá, Colombia",
     "years": "+20 años",
     "genres": "House / Deep / Progressive"
@@ -35,13 +55,14 @@
   },
   "contact": {
     "title": "Bookings",
-    "subtitle": "Para bookings, prensa o cualquier otra consulta",
+    "subtitle": "Para bookings, prensa o curaduría sonora de eventos",
     "name": "Nombre",
     "email": "Email",
     "subject": "Asunto",
     "subject_booking": "Booking",
     "subject_press": "Prensa",
     "subject_other": "Otro",
+    "subject_brand": "Curaduría sonora",
     "message": "Mensaje",
     "send": "Enviar",
     "sending": "Enviando...",

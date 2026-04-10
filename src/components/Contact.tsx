@@ -88,6 +88,7 @@ export default function Contact() {
             >
               <option value="booking">{t.contact.subject_booking}</option>
               <option value="press">{t.contact.subject_press}</option>
+              <option value="brand">{t.contact.subject_brand}</option>
               <option value="other">{t.contact.subject_other}</option>
             </select>
           </div>

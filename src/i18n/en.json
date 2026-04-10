@@ -4,27 +4,47 @@
     "music": "Music",
     "story": "Story",
     "gallery": "Gallery",
-    "contact": "Contact"
+    "contact": "Contact",
+    "deepsidency": "Deepsidency",
+    "nowhere": "Nowhere Traveler"
   },
   "hero": {
     "tagline": "House. Deep. Progressive.",
-    "subtitle": "+20 years crafting sonic narratives",
+    "subtitle": "+20 years of elegant sonic narrative",
     "cta_listen": "Listen",
     "cta_bookings": "Bookings"
   },
   "music": {
     "title": "Music",
-    "subtitle": "Releases, sonic explorations and live sessions",
+    "subtitle": "Releases, curated sets and live sessions",
     "listen_on": "Listen on",
     "support": "Support on Bandcamp",
     "latest": "Latest"
   },
+  "deepsidency": {
+    "title": "Deepsidency",
+    "subtitle": "Monthly curated set series. Club sound, independent and authentic.",
+    "description": "Deepsidency is more than a set series: it's a mental residency that reinvents itself every month. Deep house, melodic techno and hypnotic progressive, woven into a narrative that moves without rushing. Each episode is a curation for ears looking for something beyond speed.",
+    "audience": "For those who don't go out every weekend anymore, but when they do, they mean it.",
+    "cta": "Listen to Deepsidency"
+  },
+  "nowhere": {
+    "title": "Nowhere Traveler",
+    "badge": "Live",
+    "subtitle": "No map. Just movement.",
+    "description": "Nowhere Traveler is the live act born after two decades behind the decks. Synthesizers, real-time loops and atmospheric textures that are composed, transformed and deconstructed on stage. Each performance is unique: a sonic travel journal between club and contemplation.",
+    "quote": "There is no destination. Only emotional trajectories.",
+    "pillars_title": "The journey",
+    "pillar_sonic": "Deep, progressive and electronica between 118-126 BPM. Granular textures, long pads, warm bass and minimalist percussion with groove.",
+    "pillar_performative": "Modular show structure. Directed improvisation with melodic hooks that return as anchors.",
+    "pillar_visual": "Broken cartographies, glitched topographic lines. Audio-reactive visuals in real time."
+  },
   "story": {
     "title": "Story",
     "name": "Miguel Espinosa a.k.a. Spin",
-    "bio_1": "DJ and sound curator with over 20 years in electronic music. He moves between house, deep and progressive, always looking for the sound to tell a story.",
-    "bio_2": "From Bogotá, he's built a career on elegant, carefully curated sets, playing the clubs and festivals that matter in Colombia.",
-    "bio_3": "His sound has deep layers, hypnotic progressions and a selection that connects with the dance floor on a visceral level.",
+    "bio_1": "DJ and sound curator with over 20 years in the electronic scene. I'm not a hits DJ: I'm a narrator of emotions, someone who believes music doesn't impose itself, it insinuates.",
+    "bio_2": "Each set is a session of emotional curation, where tempo, texture and energy talk to the audience in real time. From underground spaces to boutique events, my approach adapts but always keeps a deep identity: enveloping sound, elegant groove, subtle progression.",
+    "bio_3": "I've played at Baum, Billares Londres, Octava, Radio Berlin and Hotel W in Bogota. In Barcelona, at City Hall, Macarena and the W. In Ibiza, live from Ibiza Global Radio. In Mexico City at AM and the DJ World Conference.",
     "location": "Bogotá, Colombia",
     "years": "+20 years",
     "genres": "House / Deep / Progressive"
@@ -35,13 +55,14 @@
   },
   "contact": {
     "title": "Bookings",
-    "subtitle": "For bookings, press or other inquiries",
+    "subtitle": "For bookings, press or sonic curation for events",
     "name": "Name",
     "email": "Email",
     "subject": "Subject",
     "subject_booking": "Booking",
     "subject_press": "Press",
     "subject_other": "Other",
+    "subject_brand": "Sonic curation",
     "message": "Message",
     "send": "Send",
     "sending": "Sending...",

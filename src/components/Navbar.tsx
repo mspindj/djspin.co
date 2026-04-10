@@ -15,6 +15,8 @@ export default function Navbar() {
   const links = [
     { href: '#home', label: t.nav.home },
     { href: '#music', label: t.nav.music },
+    { href: '#deepsidency', label: t.nav.deepsidency },
+    { href: '#nowhere', label: t.nav.nowhere },
     { href: '#story', label: t.nav.story },
     { href: '#gallery', label: t.nav.gallery },
     { href: '#contact', label: t.nav.contact },
