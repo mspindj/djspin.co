@@ -1,41 +1,41 @@
 {
   "nav": {
     "home": "Inicio",
-    "music": "Musica",
+    "music": "Música",
     "story": "Historia",
-    "gallery": "Galeria",
+    "gallery": "Galería",
     "contact": "Contacto"
   },
   "hero": {
     "tagline": "House. Deep. Progressive.",
-    "subtitle": "+20 anos creando narrativas sonoras",
+    "subtitle": "+20 años creando narrativas sonoras",
     "cta_listen": "Escuchar",
     "cta_bookings": "Bookings"
   },
   "music": {
-    "title": "Musica",
-    "subtitle": "Releases oficiales, exploraciones sonoras y sesiones en vivo",
+    "title": "Música",
+    "subtitle": "Releases, exploraciones sonoras y sesiones en vivo",
     "listen_on": "Escuchar en",
     "support": "Apoyar en Bandcamp",
-    "latest": "Lo mas reciente"
+    "latest": "Lo más reciente"
   },
   "story": {
     "title": "Historia",
     "name": "Miguel Espinosa a.k.a. Spin",
-    "bio_1": "DJ y curador sonoro con mas de 20 anos de trayectoria en la escena de musica electronica. Especializado en house, deep y progressive, con un enfoque en la narrativa emocional del sonido.",
-    "bio_2": "Desde Bogota, Colombia, Spin ha construido una carrera definida por sets elegantes y cuidadosamente curados, presentandose en los principales clubes y festivales de la escena colombiana.",
-    "bio_3": "Su sonido se caracteriza por capas profundas, progresiones hipnoticas y una seleccion que conecta con la pista de baile a un nivel visceral.",
-    "location": "Bogota, Colombia",
-    "years": "+20 anos",
+    "bio_1": "DJ y curador sonoro con más de 20 años en la escena electrónica. Se mueve entre el house, el deep y el progressive, siempre buscando que el sonido cuente algo.",
+    "bio_2": "Desde Bogotá, ha construido una carrera a punta de sets elegantes y bien curados, tocando en los clubes y festivales que importan en Colombia.",
+    "bio_3": "Su sonido tiene capas profundas, progresiones que hipnotizan y una selección que conecta con la pista a un nivel visceral.",
+    "location": "Bogotá, Colombia",
+    "years": "+20 años",
     "genres": "House / Deep / Progressive"
   },
   "gallery": {
-    "title": "Galeria",
-    "subtitle": "Momentos en cabina y detras de escena"
+    "title": "Galería",
+    "subtitle": "Momentos en cabina y detrás de escena"
   },
   "contact": {
     "title": "Bookings",
-    "subtitle": "Para bookings, prensa u otras consultas",
+    "subtitle": "Para bookings, prensa o cualquier otra consulta",
     "name": "Nombre",
     "email": "Email",
     "subject": "Asunto",
@@ -45,8 +45,8 @@
     "message": "Mensaje",
     "send": "Enviar",
     "sending": "Enviando...",
-    "success": "Mensaje enviado. Te respondere pronto.",
-    "error": "Error al enviar. Intenta de nuevo."
+    "success": "Mensaje enviado. Te respondo pronto.",
+    "error": "No se pudo enviar. Inténtalo de nuevo."
   },
   "footer": {
     "rights": "Todos los derechos reservados"
