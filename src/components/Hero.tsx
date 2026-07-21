@@ -30,7 +30,7 @@ export default function Hero() {
         ref={bgRef}
         className="absolute inset-0 scale-110"
         style={{
-          backgroundImage: 'url(/images/spin-hero.jpeg)',
+          backgroundImage: 'url(/images/spin-hero.webp)',
           backgroundSize: 'cover',
           backgroundPosition: 'center 30%',
           willChange: 'transform',
@@ -44,7 +44,7 @@ export default function Hero() {
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <h1 className="mb-6 animate-[fadeUp_1s_ease-out_0.2s_both]">
           <img
-            src="/images/spin-logo.png"
+            src="/images/spin-logo.webp"
             alt="Spin"
             className="h-28 md:h-40 w-auto mx-auto"
           />
@@ -58,18 +58,19 @@ export default function Hero() {
           {t.hero.subtitle}
         </p>
 
-        <div className="flex items-center justify-center gap-4 animate-[fadeUp_1s_ease-out_0.8s_both]">
-          <button
-            onClick={() => scrollTo('#music')}
-            className="px-8 py-3 bg-accent hover:bg-accent-hover text-white text-sm font-medium tracking-[0.15em] uppercase transition-all duration-300 glow-hover"
-          >
-            {t.hero.cta_listen}
-          </button>
+        {/* CTAs — bookings es primary (goal #1 del sitio). Escuchar queda como secondary. */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-[fadeUp_1s_ease-out_0.8s_both]">
           <button
             onClick={() => scrollTo('#contact')}
-            className="px-8 py-3 border border-text-muted text-text-secondary hover:text-text-primary hover:border-text-primary text-sm font-medium tracking-[0.15em] uppercase transition-all duration-300"
+            className="w-full sm:w-auto px-10 py-3.5 bg-accent hover:bg-accent-hover text-white text-sm font-medium tracking-[0.15em] uppercase transition-all duration-300 glow-hover"
           >
             {t.hero.cta_bookings}
+          </button>
+          <button
+            onClick={() => scrollTo('#music')}
+            className="w-full sm:w-auto px-10 py-3.5 border border-text-muted text-text-secondary hover:text-text-primary hover:border-text-primary text-sm font-medium tracking-[0.15em] uppercase transition-all duration-300"
+          >
+            {t.hero.cta_listen}
           </button>
         </div>
       </div>

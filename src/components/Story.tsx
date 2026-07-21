@@ -11,7 +11,7 @@ export default function Story() {
           <div className="relative">
             <div className="relative overflow-hidden rounded-lg float">
               <img
-                src="/images/spin-story.jpeg"
+                src="/images/spin-story.webp"
                 alt="Spin - Miguel Espinosa"
                 className="w-full h-auto object-cover"
                 loading="lazy"

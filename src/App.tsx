@@ -1,9 +1,10 @@
 import { LanguageProvider } from './context/LanguageContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Music from './components/Music'
+import Discography from './components/Discography'
 import Deepsidency from './components/Deepsidency'
 import NowhereTraveler from './components/NowhereTraveler'
+import VenueMarquee from './components/VenueMarquee'
 import Story from './components/Story'
 import Gallery from './components/Gallery'
 import Contact from './components/Contact'
@@ -16,9 +17,10 @@ export default function App() {
         <Navbar />
         <main>
           <Hero />
-          <Music />
+          <Discography />
           <Deepsidency />
           <NowhereTraveler />
+          <VenueMarquee />
           <Story />
           <Gallery />
           <Contact />

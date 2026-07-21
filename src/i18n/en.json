@@ -9,17 +9,23 @@
     "nowhere": "Nowhere Traveler"
   },
   "hero": {
-    "tagline": "House. Deep. Progressive.",
+    "tagline": "Progressive. Deep. House.",
     "subtitle": "+20 years of elegant sonic narrative",
     "cta_listen": "Listen",
     "cta_bookings": "Bookings"
   },
   "music": {
+    "eyebrow": "Discography",
     "title": "Music",
-    "subtitle": "Releases, curated sets and live sessions",
+    "subtitle": "EPs and singles released on Bandcamp. Each card opens the release.",
     "listen_on": "Listen on",
-    "support": "Support on Bandcamp",
-    "latest": "Latest"
+    "support": "Full catalogue on Bandcamp",
+    "latest": "Latest",
+    "filter_aria": "Filter by release type",
+    "filter_all": "All",
+    "filter_eps": "EPs",
+    "filter_singles": "Singles",
+    "tag_ep": "EP"
   },
   "deepsidency": {
     "title": "Deepsidency",
@@ -39,6 +45,11 @@
     "pillar_performative": "Modular show structure. Directed improvisation with melodic hooks that return as anchors.",
     "pillar_visual": "Broken cartographies, glitched topographic lines. Audio-reactive visuals in real time."
   },
+  "venues": {
+    "eyebrow": "Played at",
+    "title": "Booths that have been home",
+    "aria": "Venues where Spin has played"
+  },
   "story": {
     "title": "Story",
     "name": "Miguel Espinosa a.k.a. Spin",
@@ -47,7 +58,7 @@
     "bio_3": "I've played at Baum, Billares Londres, Octava, Radio Berlin and Hotel W in Bogota. In Barcelona, at City Hall, Macarena and the W. In Ibiza, live from Ibiza Global Radio. In Mexico City at AM and the DJ World Conference.",
     "location": "Bogotá, Colombia",
     "years": "+20 years",
-    "genres": "House / Deep / Progressive"
+    "genres": "Progressive / Deep / House"
   },
   "gallery": {
     "title": "Gallery",

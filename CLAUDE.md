@@ -58,5 +58,74 @@ La API de contacto (api/contact.ts) usa @vercel/node types y llama a Resend. La 
 - Playlist Deepsidency de SoundCloud embebida en sección Música
 - Formulario de contacto conectado a Resend
 - Bilingüe ES/EN funcional con toggle en navbar
-- **Pendiente:** Optimizar logo PNG (5.7MB → WebP o SVG)
 - **Pendiente:** Agregar favicon con logo Spin
+
+## Jornada 2026-06-01 — Sesión 1 de rediseño profundo
+
+### Goal del rediseño (acordado con Miguel)
+3 metas balanceadas: bookings + audiencia musical + EPK digital. Orden de impacto:
+1. Fix logo + jerarquía CTA  ✅ hecho
+2. Player nativo de tracks (Sesión 2)
+3. Social proof de venues  ✅ hecho (marquee)
+4. Bio rica con timeline + venues por ciudad (Sesión 2)
+
+### Cambios ejecutados Sesión 1
+- **Optimización masiva de imágenes**: 50MB → 2.2MB (23× más liviano)
+  - WebP via `cwebp -q 82 -resize 1920 0`. Logo en lossless 800w (5.5MB→14KB)
+  - Originales backupeados en `public/images/.originals/`
+  - Refs en código actualizadas vía sed (Hero, Story, Gallery, Music, Navbar, Footer)
+- **Hero CTA invertido**: BOOKINGS ahora primary (rojo), ESCUCHAR secondary (ghost). Goal del sitio explícito en el fold.
+- **Nuevo `VenueMarquee.tsx`**: marquee infinito con los 11 venues reales sacados de `story.bio_3` (Baum, Billares Londres, Octava, Radio Berlín, Hotel W Bogotá, City Hall BCN, Macarena BCN, Hotel W BCN, Ibiza Global Radio, AM CDMX, DJ World Conference). Insertado entre NowhereTraveler y Story. Animación CSS `@keyframes marquee` con `prefers-reduced-motion` honrado, pausa en hover, mask-fade en los bordes.
+- **Music covers → URLs por EP**: cada release card ahora linkea a `mspin.bandcamp.com/album/<slug>` específico, no al perfil. Botón play overlay aparece en hover. Marcado `TODO @miguel` para verificar slugs reales.
+- **i18n**: nuevas keys `venues.{eyebrow, title, aria}` en es/en.
+
+### Decisiones tomadas Sesión 1
+- **NO usar componentes 21st.dev SaaS** (testimonial sliders, pricing tables, feature grids con iconos lucide, animated beams). Romperían la estética techno/cinematográfica. Solo se usaron patrones de marquee, play overlay y bento-grid intent — escritos a mano con tokens propios del design system.
+- **VenueMarquee con animación CSS pura**, sin lib externa. Misma decisión que el resto del proyecto (no GSAP).
+- **Venues sacados de la bio existente**, no inventados. La info ya estaba en `bio_3` enterrada en párrafo.
+
+### Bug encontrado y resuelto
+- `node_modules` quedó con binarios nativos de rolldown de otra máquina post-migración mini. `npm install` limpio lo arregló. Si el build falla con `MODULE_NOT_FOUND` en `rolldown/dist/shared/binding-*.mjs`, reinstalar.
+
+### Roadmap restante (Sesiones 2-5)
+- **Sesión 2 — Player nativo + Story rica**
+  - Embed Bandcamp por EP (iframe con preview de 30s por track) reemplazando la lista de texto plano
+  - Story refactor: sticky scroll reveal cinematográfico; venues por ciudad como chips/grid; timeline visual de carrera
+  - Verificar URLs reales de cada EP (Miguel pasa slugs o las saca el agente vía API de Bandcamp)
+- **Sesión 3 — Agenda + Gallery con contexto**
+  - Nueva sección Agenda con próximos eventos (incluso si dice "TBA — Apply for residency")
+  - Gallery: cada foto con caption (venue + fecha + evento). Lightbox con metadata.
+- **Sesión 4 — EPK digital completo**
+  - Reemplazar `docs/Spin EPK 2022.pdf` con sección web dedicada
+  - Bio rica, fotos hi-res descargables (con botón "Download press kit"), tech rider, riders de stage, contacto management
+- **Sesión 5 — Pulido + perf + SEO**
+  - Open Graph images, meta tags por idioma, sitemap.xml, JSON-LD MusicGroup
+  - Auditoría Lighthouse, accessibility pass (focus rings, ARIA), tests de prefers-reduced-motion
+
+### Pendientes derivados Sesión 1
+- Logo PNG en `.originals/` se puede borrar después de validar que .webp funciona en producción
+- `images/.originals/` (50MB) NO debe commitearse a git — agregar a .gitignore ✅ hecho
+
+### Mini-iteración 1.5 — Discografía completa (mismo día)
+
+Miguel pasó `mspin.bandcamp.com` como fuente. Resultado:
+
+- **Scrapeado el catálogo completo** vía WebFetch: 16 releases reales (3 EPs + 13 singles), con título, slug `/album/...` o `/track/...`, y coverId del CDN de Bandcamp.
+- **`Music.tsx` eliminado**. Reemplazado por `Discography.tsx` que:
+  - Lista los 16 releases en grilla 2/3/4 columnas (mobile/tablet/desktop)
+  - Filtros con chips: Todo (16) / EPs (3) / Singles (13) con conteo y estado activo
+  - Cada card linkea al release específico (`mspin.bandcamp.com/album/...` o `/track/...`)
+  - EPs ordenados primero, con badge `EP` rojo en esquina top-left de la cover
+  - Hover: play button rojo con glow + scale-up de la cover
+  - Covers servidas directo del CDN de Bandcamp en tamaño `_10` (1200x1200 retina)
+  - Mantiene el CTA al final que lleva al perfil completo
+- **Bandcamp CDN pattern documentado**: `https://f4.bcbits.com/img/<coverId>_<size>.jpg`. Sizes: `_2` (350px), `_5` (700px), `_10` (1200px), `_16` (1500px).
+- **Tracklist hardcodeado eliminado** (esos 6 títulos eran subset de los singles reales, ahora redundantes).
+- **Bug del Navbar**: "Nowhere Traveler" wrappeaba en widths 768-1024 colapsando el layout. Fix: subir breakpoint del desktop nav de `md:` a `lg:`, hamburger visible hasta `lg:`. Agregado `whitespace-nowrap` por las dudas.
+
+### Convención nueva: scrapear vs hardcodear catálogos
+Cuando el catálogo de Bandcamp/Soundcloud cambie, NO actualizar a mano:
+1. Re-scrapear `https://mspin.bandcamp.com/` con WebFetch pidiendo JSON
+2. Para covers/años faltantes, parallel-fetch de cada release individual
+3. Pegar el array resultante en `releases` de `Discography.tsx`
+4. Verificar build → preview → DOM eval del contador (`#music [role="tab"]`)

@@ -12,11 +12,12 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Nowhere Traveler queda como sección de la página pero NO en el menú.
+  // Es el proyecto live de Miguel y vive en nowheretraveler.com.
   const links = [
     { href: '#home', label: t.nav.home },
     { href: '#music', label: t.nav.music },
     { href: '#deepsidency', label: t.nav.deepsidency },
-    { href: '#nowhere', label: t.nav.nowhere },
     { href: '#story', label: t.nav.story },
     { href: '#gallery', label: t.nav.gallery },
     { href: '#contact', label: t.nav.contact },
@@ -42,20 +43,20 @@ export default function Navbar() {
           className="hover:opacity-80 transition-opacity"
         >
           <img
-            src="/images/spin-logo.png"
+            src="/images/spin-logo.webp"
             alt="Spin"
             className="h-8 w-auto"
           />
         </a>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop Links — breakpoint subido a lg para evitar wrap con "Nowhere Traveler" */}
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8">
           {links.map(link => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => { e.preventDefault(); handleClick(link.href) }}
-              className="text-sm font-medium tracking-[0.15em] uppercase text-text-secondary hover:text-text-primary transition-colors duration-300"
+              className="text-xs xl:text-sm font-medium tracking-[0.15em] uppercase text-text-secondary hover:text-text-primary transition-colors duration-300 whitespace-nowrap"
             >
               {link.label}
             </a>
@@ -71,10 +72,10 @@ export default function Navbar() {
             {lang === 'es' ? 'EN' : 'ES'}
           </button>
 
-          {/* Hamburger */}
+          {/* Hamburger — visible until lg para que coincida con el nav desktop */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-1"
+            className="lg:hidden flex flex-col gap-1.5 p-1"
             aria-label="Menu"
           >
             <span className={`block w-6 h-px bg-text-primary transition-transform duration-300 ${menuOpen ? 'rotate-45 translate-y-[3.5px]' : ''}`} />
@@ -86,8 +87,8 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 glass-strong overflow-hidden transition-all duration-500 ${
-          menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+        className={`lg:hidden absolute top-full left-0 right-0 glass-strong overflow-hidden transition-all duration-500 ${
+          menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <div className="px-6 py-6 flex flex-col gap-4">

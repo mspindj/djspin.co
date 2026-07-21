@@ -3,12 +3,12 @@ import { useLang } from '../context/LanguageContext'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const images = [
-  { src: '/images/spin-booth.jpeg', alt: 'Spin DJ booth' },
-  { src: '/images/spin-booth-2.jpeg', alt: 'Spin live set' },
-  { src: '/images/spin-crowd.jpeg', alt: 'Crowd at Spin set' },
-  { src: '/images/spin-graffiti.jpeg', alt: 'Spin portrait' },
-  { src: '/images/spin-graffiti-2.jpeg', alt: 'Spin portrait closeup' },
-  { src: '/images/spin-story-2.jpeg', alt: 'Spin casual' },
+  { src: '/images/spin-booth.webp', alt: 'Spin DJ booth' },
+  { src: '/images/spin-booth-2.webp', alt: 'Spin live set' },
+  { src: '/images/spin-crowd.webp', alt: 'Crowd at Spin set' },
+  { src: '/images/spin-graffiti.webp', alt: 'Spin portrait' },
+  { src: '/images/spin-graffiti-2.webp', alt: 'Spin portrait closeup' },
+  { src: '/images/spin-story-2.webp', alt: 'Spin casual' },
 ]
 
 export default function Gallery() {

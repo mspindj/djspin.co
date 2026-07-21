@@ -9,17 +9,23 @@
     "nowhere": "Nowhere Traveler"
   },
   "hero": {
-    "tagline": "House. Deep. Progressive.",
+    "tagline": "Progressive. Deep. House.",
     "subtitle": "+20 años de narrativa sonora elegante",
     "cta_listen": "Escuchar",
     "cta_bookings": "Bookings"
   },
   "music": {
+    "eyebrow": "Discografía",
     "title": "Música",
-    "subtitle": "Releases, sets curados y sesiones en vivo",
+    "subtitle": "EPs y singles publicados en Bandcamp. Cada tarjeta lleva al release.",
     "listen_on": "Escuchar en",
-    "support": "Apoyar en Bandcamp",
-    "latest": "Lo más reciente"
+    "support": "Catálogo completo en Bandcamp",
+    "latest": "Lo más reciente",
+    "filter_aria": "Filtrar por tipo de release",
+    "filter_all": "Todo",
+    "filter_eps": "EPs",
+    "filter_singles": "Singles",
+    "tag_ep": "EP"
   },
   "deepsidency": {
     "title": "Deepsidency",
@@ -39,6 +45,11 @@
     "pillar_performative": "Estructura modular del show. Improvisación dirigida con ganchos melódicos que vuelven como anclas.",
     "pillar_visual": "Cartografías rotas, líneas topográficas glitcheadas. Visuales reactivos al audio en tiempo real."
   },
+  "venues": {
+    "eyebrow": "Played at",
+    "title": "Cabinas que han sido casa",
+    "aria": "Venues donde Spin ha tocado"
+  },
   "story": {
     "title": "Historia",
     "name": "Miguel Espinosa a.k.a. Spin",
@@ -47,7 +58,7 @@
     "bio_3": "He tocado en Baum, Billares Londres, Octava, Radio Berlín y el Hotel W en Bogotá. En Barcelona, en City Hall, Macarena y el W. En Ibiza, en directo desde Ibiza Global Radio. En Ciudad de México en AM y la Expo DJ World Conference.",
     "location": "Bogotá, Colombia",
     "years": "+20 años",
-    "genres": "House / Deep / Progressive"
+    "genres": "Progressive / Deep / House"
   },
   "gallery": {
     "title": "Galería",
