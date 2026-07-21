@@ -41,6 +41,7 @@ export default function Story() {
             <div className="flex flex-wrap gap-8">
               {[
                 { value: t.story.years, label: t.story.location },
+                { value: t.story.reach_value, label: t.story.reach_label },
                 { value: t.story.genres, label: '' },
               ].map(stat => (
                 <div key={stat.value} className="border-l-2 border-accent/30 pl-4">

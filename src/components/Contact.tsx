@@ -45,7 +45,9 @@ export default function Contact() {
           <h2 className="font-display text-4xl md:text-5xl tracking-[0.08em] mb-4">
             {t.contact.title}
           </h2>
-          <p className="text-text-secondary">{t.contact.subtitle}</p>
+          <p className="text-text-secondary max-w-xl mx-auto">{t.contact.subtitle}</p>
+          <p className="text-text-muted text-sm mt-4 max-w-xl mx-auto">{t.contact.offer_line}</p>
+          <p className="text-accent text-xs tracking-[0.15em] uppercase mt-3">{t.contact.offer_response}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="glass rounded-lg p-8 space-y-6">

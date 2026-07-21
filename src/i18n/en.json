@@ -10,7 +10,7 @@
   },
   "hero": {
     "tagline": "Progressive. Deep. House.",
-    "subtitle": "+20 years of elegant sonic narrative",
+    "subtitle": "Sound that reads the room. Twenty-plus years behind the decks, from Bogotá to Ibiza.",
     "cta_listen": "Listen",
     "cta_bookings": "Bookings"
   },
@@ -53,12 +53,14 @@
   "story": {
     "title": "Story",
     "name": "Miguel Espinosa a.k.a. Spin",
-    "bio_1": "DJ and sound curator with over 20 years in the electronic scene. I'm not a hits DJ: I'm a narrator of emotions, someone who believes music doesn't impose itself, it insinuates.",
-    "bio_2": "Each set is a session of emotional curation, where tempo, texture and energy talk to the audience in real time. From underground spaces to boutique events, my approach adapts but always keeps a deep identity: enveloping sound, elegant groove, subtle progression.",
-    "bio_3": "I've played at Baum, Billares Londres, Octava, Radio Berlin and Hotel W in Bogota. In Barcelona, at City Hall, Macarena and the W. In Ibiza, live from Ibiza Global Radio. In Mexico City at AM and the DJ World Conference.",
+    "bio_1": "I'm Miguel Espinosa, Spin. Over twenty years in the electronic scene and one idea that never moves: I don't play hits, I build the emotional arc of a night. Music doesn't impose itself, it insinuates.",
+    "bio_2": "Every set is curation in real time. I read the crowd, the room and the hour, and I move tempo, texture and energy to fit the moment. It works the same in an underground club as in a boutique event: the sound changes skin, the identity stays. Elegant groove, subtle progression, enveloping from start to finish.",
+    "bio_3": "I've played at Baum, Billares Londres, Octava, Radio Berlin and Hotel W in Bogota. In Barcelona, at City Hall, Macarena and the W. In Ibiza, live from Ibiza Global Radio. In Mexico City, at AM and the DJ World Conference.",
     "location": "Bogotá, Colombia",
     "years": "+20 years",
-    "genres": "Progressive / Deep / House"
+    "genres": "Progressive / Deep / House",
+    "reach_value": "4 countries",
+    "reach_label": "Bogotá · Barcelona · Ibiza · Mexico City"
   },
   "gallery": {
     "title": "Gallery",
@@ -66,7 +68,9 @@
   },
   "contact": {
     "title": "Bookings",
-    "subtitle": "For bookings, press or sonic curation for events",
+    "subtitle": "Tell me the space, the date and who you want on the floor. I'll send back a set proposal built for that night.",
+    "offer_line": "DJ set or Nowhere Traveler live format, adapted to your event. EPK and rider ready for production.",
+    "offer_response": "I reply within 48 hours.",
     "name": "Name",
     "email": "Email",
     "subject": "Subject",

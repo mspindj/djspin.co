@@ -129,3 +129,33 @@ Cuando el catálogo de Bandcamp/Soundcloud cambie, NO actualizar a mano:
 2. Para covers/años faltantes, parallel-fetch de cada release individual
 3. Pegar el array resultante en `releases` de `Discography.tsx`
 4. Verificar build → preview → DOM eval del contador (`#music [role="tab"]`)
+
+## Jornada 2026-07-20 — Copy con lente Hormozi + SEO
+
+### Contexto
+Sesión 1 + 1.5 estaba sin commitear pese a estar documentada como hecha. Se verificó (build, preview, DOM), se limpiaron 3 covers `.webp` huérfanas y se commiteó (`f6f5e3e`). Prod confirmado sano: el CDN de Bandcamp sirve las covers (el 0-de-16 en preview headless era solo lazy-load que no dispara sin scroll visual real, no un bloqueo).
+
+### Decisión de fondo: Hormozi como diagnóstico, no como voz
+Aplicar el *tono* de Hormozi (value-stacking con precios ficticios, garantías tipo "o te devuelvo la plata", countdown de urgencia, "serías tonto en decir que no") habría roto la estética techno/cinematográfica y espantado al público real (bookers de venues, curadores de eventos boutique, que convierten por criterio y credibilidad). Se usó el **diagnóstico** del Value Equation, no el copy:
+- **Perceived Likelihood** (palanca más débil): la prueba estaba enterrada en `bio_3` como párrafo corrido. Se sacó a la superficie con un stat nuevo de alcance ("4 países · Bogotá · Barcelona · Ibiza · CDMX") y bio reescrita que lidera con lo que Spin hace por la noche, no con auto-descripción.
+- **Reducir fricción/riesgo del booker**: la sección Bookings ahora abre con el primer paso de bajo compromiso ("Cuéntame el espacio, la fecha y a quién quieres en la pista. Te devuelvo una propuesta de set pensada para esa noche."), formatos disponibles (DJ set / Nowhere Traveler live, EPK y rider listos) y promesa de respuesta (<48h). Ese es el equivalente elegante de una garantía.
+- **Hero**: subtitle pasó de auto-descripción ("+20 años de narrativa sonora elegante") a outcome + prueba geográfica ("Sonido que lee la noche. Más de veinte años en cabina, de Bogotá a Ibiza.").
+
+### SEO (adelanto de Sesión 5)
+- `index.html`: JSON-LD `MusicGroup` (name Spin, alternateName Miguel Espinosa, genre, foundingLocation Bogotá, member Person, 5 `sameAs`: IG/FB/YT/SoundCloud/Bandcamp). Meta description reescrita con keywords de booking + geografía. Canonical, OG completo (title/desc/image/locale es_ES + alternate en_US), Twitter summary_large_image.
+- `public/og-image.jpg` (1200×630, 55KB) generada con `sips` desde `spin-hero.jpeg`. **Nota:** OG image en JPG (no WebP) por compatibilidad con FB/LinkedIn.
+- `public/robots.txt` + `public/sitemap.xml` (una sola URL, es SPA de una página).
+
+### humanizalo aplicado
+- Regla de no-raya (—): el footer usaba `&mdash;` en texto visible → cambiado a `&middot;` (·). Los em-dash restantes en `src/` son comentarios de código, no texto entregado, se dejaron.
+- Copy ES sin relleno, tuteo neutro, primera persona. El patrón "no X, sino Y" aparece una sola vez (posicionamiento genuino ya existente), no como tic.
+- Verificado en DOM: `document.body.innerText.includes('—')` === false.
+
+### Nueva key i18n
+- `story.reach_value` / `story.reach_label` (stat de alcance)
+- `contact.offer_line` / `contact.offer_response` (bloque de oferta en Bookings)
+
+### Pendientes derivados
+- **Botón "Descargar press kit"** en Bookings: se dejó fuera porque el único EPK es `docs/Spin EPK 2022.pdf` (desactualizado, fuera de `public/`). Va con Sesión 4 (EPK digital).
+- **Peso muerto en repo**: los `.jpeg` originales y `cover-*.jpg` en `public/images/` siguen tracked pero ya nadie los referencia (todo usa `.webp` + CDN Bandcamp). Limpiar en algún commit de mantenimiento.
+- Verificar en prod que la og-image renderiza bien al compartir el link (probar con el debugger de Facebook/LinkedIn).

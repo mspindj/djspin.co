@@ -28,7 +28,7 @@ export default function Footer() {
         </div>
 
         <p className="text-xs text-text-muted">
-          &copy; {new Date().getFullYear()} Spin &mdash; {t.footer.rights}
+          &copy; {new Date().getFullYear()} Spin &middot; {t.footer.rights}
         </p>
       </div>
     </footer>
