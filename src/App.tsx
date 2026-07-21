@@ -4,7 +4,7 @@ import Hero from './components/Hero'
 import Discography from './components/Discography'
 import Deepsidency from './components/Deepsidency'
 import NowhereTraveler from './components/NowhereTraveler'
-import VenueMarquee from './components/VenueMarquee'
+import Venues from './components/Venues'
 import Story from './components/Story'
 import Gallery from './components/Gallery'
 import Contact from './components/Contact'
@@ -20,7 +20,7 @@ export default function App() {
           <Discography />
           <Deepsidency />
           <NowhereTraveler />
-          <VenueMarquee />
+          <Venues />
           <Story />
           <Gallery />
           <Contact />

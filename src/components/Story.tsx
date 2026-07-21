@@ -6,9 +6,9 @@ export default function Story() {
   return (
     <section id="story" className="py-24 md:py-32 px-6 bg-bg-secondary">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image */}
-          <div className="relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          {/* Image — sticky en desktop mientras la bio hace scroll */}
+          <div className="relative lg:sticky lg:top-28">
             <div className="relative overflow-hidden rounded-lg float">
               <img
                 src="/images/spin-story.webp"

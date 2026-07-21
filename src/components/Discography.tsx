@@ -11,13 +11,14 @@ interface Release {
   type: ReleaseType
   slug: string      // /album/<slug> o /track/<slug>
   coverId: string   // aXXXXXX — Bandcamp CDN image id
+  albumId?: string  // id numérico de Bandcamp para el embed (data-tralbum). Solo EPs por ahora.
 }
 
 const releases: Release[] = [
   // EPs primero — son el cuerpo principal del catálogo
-  { title: 'Into Your Spell EP',  type: 'EP',     slug: 'album/into-your-spell-ep',   coverId: 'a1081458528' },
-  { title: "Don't Know Yet EP",   type: 'EP',     slug: 'album/dont-know-yet-ep',     coverId: 'a3722064224' },
-  { title: 'Play Tha Bass EP',    type: 'EP',     slug: 'album/play-tha-bass-ep',     coverId: 'a3441425956' },
+  { title: 'Into Your Spell EP',  type: 'EP',     slug: 'album/into-your-spell-ep',   coverId: 'a1081458528', albumId: '633052668' },
+  { title: "Don't Know Yet EP",   type: 'EP',     slug: 'album/dont-know-yet-ep',     coverId: 'a3722064224', albumId: '1463701055' },
+  { title: 'Play Tha Bass EP',    type: 'EP',     slug: 'album/play-tha-bass-ep',     coverId: 'a3441425956', albumId: '2536298805' },
   // Singles — orden similar al de Bandcamp
   { title: 'Some Other Things',       type: 'single', slug: 'track/some-other-things',       coverId: 'a0659005967' },
   { title: 'Deeper Shade Of Love',    type: 'single', slug: 'track/deeper-shade-of-love',    coverId: 'a1630000820' },
@@ -40,6 +41,9 @@ export default function Discography() {
   const { t } = useLang()
   const [filter, setFilter] = useState<Filter>('all')
   const gridRef = useScrollAnimation<HTMLDivElement>({ children: true, stagger: 0.06 })
+
+  // EP destacado para el player embebido (el más reciente con albumId).
+  const featured = releases.find(r => r.type === 'EP' && r.albumId)
 
   const filtered = useMemo(() => {
     if (filter === 'all') return releases
@@ -73,6 +77,29 @@ export default function Discography() {
             {t.music.subtitle}
           </p>
         </div>
+
+        {/* Featured player — escuchar sin salir del sitio. EP más reciente. */}
+        {featured?.albumId && (
+          <div className="mb-16 max-w-3xl mx-auto">
+            <p className="text-center text-xs font-medium tracking-[0.2em] uppercase text-text-muted mb-4">
+              {t.music.latest}
+            </p>
+            <div className="rounded-lg overflow-hidden border border-border-subtle bg-bg-secondary/40 shadow-[0_0_40px_rgba(0,0,0,0.4)]">
+              <iframe
+                title={`${featured.title} — Spin`}
+                src={`https://bandcamp.com/EmbeddedPlayer/album=${featured.albumId}/size=large/bgcol=0a0a0f/linkcol=eb3e34/tracklist=true/transparent=true/`}
+                seamless
+                loading="lazy"
+                className="w-full block"
+                style={{ border: 0, height: 470 }}
+              >
+                <a href={`https://mspin.bandcamp.com/${featured.slug}`}>
+                  {featured.title} by Spin
+                </a>
+              </iframe>
+            </div>
+          </div>
+        )}
 
         {/* Filter chips */}
         <div

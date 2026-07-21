@@ -159,3 +159,36 @@ Aplicar el *tono* de Hormozi (value-stacking con precios ficticios, garantías t
 - **Botón "Descargar press kit"** en Bookings: se dejó fuera porque el único EPK es `docs/Spin EPK 2022.pdf` (desactualizado, fuera de `public/`). Va con Sesión 4 (EPK digital).
 - **Peso muerto en repo**: los `.jpeg` originales y `cover-*.jpg` en `public/images/` siguen tracked pero ya nadie los referencia (todo usa `.webp` + CDN Bandcamp). Limpiar en algún commit de mantenimiento.
 - Verificar en prod que la og-image renderiza bien al compartir el link (probar con el debugger de Facebook/LinkedIn).
+
+## Jornada 2026-07-20 — Sesión 2: player nativo + Story rica
+
+### Corrección al roadmap (premisa obsoleta)
+El roadmap de Sesión 2 pedía "embed Bandcamp por EP reemplazando la lista de texto plano". Esa premisa era de antes de la mini-iteración 1.5: ya no hay lista de texto plano, hay la grilla `Discography` de 16 releases. Meter 16 iframes de Bandcamp habría sido pesadísimo y roto la estética. Decisión: **no reemplazar la grilla**, agregar un **player destacado** (un solo embed del EP más reciente) arriba de los filtros para escuchar sin salir del sitio.
+
+### Album IDs de Bandcamp (para embeds)
+El embed necesita el id numérico del álbum, NO el slug ni el coverId. Se saca del HTML crudo (curl), del atributo `data-tralbum` (`&quot;id&quot;:NNNN`) o del `EmbeddedPlayer/v=2/album=NNNN`. WebFetch NO sirve (convierte a markdown y pierde el JSON). IDs confirmados:
+- Into Your Spell EP (dic 2024): `633052668`  ← destacado en el player
+- Don't Know Yet EP (nov 2024): `1463701055`
+- Play Tha Bass EP (oct 2024): `2536298805`
+Guardados como `albumId?` en los 3 EPs de `releases` en `Discography.tsx`. El destacado es `releases.find(EP && albumId)`.
+
+### Embed Bandcamp: patrón y theming
+`https://bandcamp.com/EmbeddedPlayer/album=<ID>/size=large/bgcol=0a0a0f/linkcol=eb3e34/tracklist=true/transparent=true/`
+- `bgcol`/`linkcol` en hex SIN `#`. bg = bg-primary (`0a0a0f`), link = accent (`eb3e34`).
+- iframe con `loading="lazy"`, `height: 470` para large con tracklist, `<a>` de fallback adentro.
+- Endpoints verificados HTTP 200 vía curl (los 3).
+
+### Venues: marquee → grid por ciudad (decisión de Miguel)
+Se **retiró `VenueMarquee.tsx`** y se creó `Venues.tsx`: grid de 4 columnas por ciudad (Bogotá / Barcelona / Ibiza / Ciudad de México) con los venues como lista + divisor accent. Más útil para un booker (formato EPK escaneable) que la banda animada. Razón: el marquee iba justo antes de Story; sumar un grid de venues habría duplicado los 11 venues dos veces seguidas. Actualizado `App.tsx` (import + uso).
+
+### Story rica
+- **bio_3 reescrita**: ya no lista los venues (ahora están en el grid `Venues`). Pasó a una línea de trayectoria que complementa el grid sin duplicar ("de cabinas underground en Bogotá a clubs y radios en Barcelona, Ibiza y Ciudad de México").
+- **Sticky image**: en Story la columna de imagen es `lg:sticky lg:top-28` mientras la bio hace scroll (desktop). CSS puro, sin JS, seguro en headless. El grid pasó de `items-center` a `items-start` (requisito de sticky).
+
+### Timeline de carrera: DIFERIDO (falta data real)
+El roadmap pedía "timeline visual de carrera" pero no hay fechas de hitos documentadas. Inventar viola la regla de no fabricar datos. **Pendiente de Miguel**: pasar hitos con año (cuándo empezó a pinchar, primera residencia, mudanza a Barcelona, fecha de Ibiza Global Radio, primeros releases, etc.) para construirlo en una próxima sesión.
+
+### Pendientes derivados Sesión 2
+- **CSS muerto**: `@keyframes marquee`, `.animate-marquee`, `.mask-fade` en `globals.css` quedaron sin uso tras borrar el marquee. Limpiar en mantenimiento (se dejó para no tocar el `@theme` sin necesidad).
+- **Timeline** pendiente de data (ver arriba).
+- Considerar más adelante: al filtrar por Singles, el player destacado (que es un EP) sigue visible arriba. Es coherente (siempre muestra el release insignia) pero si molesta, condicionar a `filter !== 'single'`.
