@@ -1,32 +1,37 @@
-import { LanguageProvider } from './context/LanguageContext'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Discography from './components/Discography'
-import Deepsidency from './components/Deepsidency'
-import NowhereTraveler from './components/NowhereTraveler'
-import Venues from './components/Venues'
-import Story from './components/Story'
-import Gallery from './components/Gallery'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import { useCallback, useEffect, useState } from 'react'
+import { copy, type Locale } from './content'
+import { MotionProvider } from './shared/motion'
+import SmoothScroll from './shared/SmoothScroll'
+import Site from './site'
+
+const LANG_KEY = 'spin-lang'
+
+// Orden: ?lang= en la URL, lo que la persona eligió antes, y español por defecto.
+function readLocale(): Locale {
+  const q = new URLSearchParams(location.search).get('lang')
+  if (q === 'es' || q === 'en') return q
+  try {
+    const s = localStorage.getItem(LANG_KEY)
+    if (s === 'es' || s === 'en') return s
+  } catch { /* sin almacenamiento */ }
+  return 'es'
+}
 
 export default function App() {
+  const [locale, setLocaleState] = useState<Locale>(readLocale)
+
+  const setLocale = useCallback((l: Locale) => {
+    setLocaleState(l)
+    try { localStorage.setItem(LANG_KEY, l) } catch { /* sin almacenamiento */ }
+  }, [])
+
+  useEffect(() => { document.documentElement.lang = locale }, [locale])
+
   return (
-    <LanguageProvider>
-      <div className="min-h-screen bg-bg-primary text-text-primary">
-        <Navbar />
-        <main>
-          <Hero />
-          <Discography />
-          <Deepsidency />
-          <NowhereTraveler />
-          <Venues />
-          <Story />
-          <Gallery />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
-    </LanguageProvider>
+    <MotionProvider>
+      <SmoothScroll>
+        <Site locale={locale} setLocale={setLocale} t={copy[locale]} />
+      </SmoothScroll>
+    </MotionProvider>
   )
 }

@@ -1,64 +1,61 @@
-# CLAUDE.md — djspin.co
+# CLAUDE.md: djspin.co
 
-## Stack técnico
-- **Framework:** React 19 + Vite 8 + TypeScript 6
-- **Styling:** Tailwind CSS 4 (vía @tailwindcss/vite plugin, usa `@theme` para tokens)
-- **Animaciones:** CSS keyframes (hero) + IntersectionObserver (scroll reveal). NO GSAP
-- **i18n:** React Context + JSON files (src/i18n/es.json, en.json). Sin librería externa
-- **Contacto:** Resend API vía Vercel serverless function (api/contact.ts)
-- **Deploy:** Vercel (auto-deploy desde GitHub main) → djspin.co
-- **Repo:** git@github.com:mspindj/djspin.co.git
+Sitio de Spin (Miguel Espinosa). Diseño "Cartel": flyer de club a dos tintas, tipografía de cartel y fotos en trama de semitono. Nació como propuesta C en `../spin-lab` (lab local de tres propuestas, 06/10/2026) y este repo es un port fiel.
 
-## Comandos frecuentes
+## Stack
+
+- React 19 + Vite 8 + TypeScript 6. CSS plano (`src/site/cartel.css`, todo bajo `.pc`). Sin Tailwind, sin GSAP, sin WebGL.
+- Lenis para el scroll suave (solo con movimiento encendido). Fuentes self-hosted con `@fontsource-variable` (Big Shoulders y Schibsted Grotesk).
+- Contacto: `api/contact.ts` (función de Vercel) llama a Resend. Necesita `RESEND_API_KEY` en Vercel.
+- Deploy: Vercel, auto-deploy desde `main` a djspin.co. Cada rama genera un preview.
+- Repo: `git@github.com:mspindj/djspin.co.git` (push por SSH).
+
 ```bash
-npm run dev          # Dev server en localhost:5173
-npm run build        # Build producción (tsc + vite build)
-npx vite preview     # Preview del build
-git push             # Auto-deploya en Vercel
+npm run dev      # localhost:5173 (en Claude Desktop: preview_start "spin-dev")
+npm run build    # tsc -b && vite build
+npm run lint     # tiene que dar 0
 ```
 
-## Convenciones del proyecto
-- **Componentes:** Un archivo por sección (Hero.tsx, Music.tsx, Story.tsx, etc.)
-- **Colores:** CSS custom properties en `@theme` de globals.css, referenciados como `text-text-primary`, `bg-bg-secondary`, etc.
-- **Tipografía:** Archivo Black para display/logo, Inter para body (Inter vía Google Fonts CDN, Archivo Black self-hosted)
-- **Imágenes:** En public/images/, nombres con prefijo `spin-` (spin-hero.jpeg, spin-booth.jpeg, etc.)
-- **Logo:** public/images/spin-logo.png (blanco con transparencia, ~5.7MB, pendiente optimizar)
-- **Traducciones:** Toda string visible al usuario va en es.json/en.json, nunca hardcodeada
-- **Español:** Usar siempre tildes, eñes y caracteres correctos. Pasar por /humanizalo antes de escribir contenido
+## Estructura
 
-## Decisiones de arquitectura
+- `src/content.ts`: ÚNICO origen del contenido. Copy en `src/content/{es,en}.json`, más `RELEASES` (16, con colores sacados de cada portada), `VENUES`, `PHOTOS`, `LINKS` y `PENDING` (lo que falta).
+- `src/site/`: el sitio. `index.tsx` (página), `Halftone.tsx` (fotos en trama, canvas 2D), `Fit.tsx` (línea ajustada al ancho), `useSlides.ts` (titulares que se deslizan), `ui.ts` (microcopy de interfaz, listado en `MICROCOPY.md`), `cartel.css`.
+- `src/shared/`: `motion.tsx` y `useMotion.ts` (switch de movimiento), `SmoothScroll.tsx` y `useLenis.ts`, `BandcampFacade.tsx`, `useBookingForm.ts`.
+- `public/img/`: fotos en webp. `public/img/tone/`: versiones en gris con contraste local, solo para calcular la trama. `public/covers/`: las 16 portadas.
+- Idioma: `?lang=es|en` en la URL, después lo guardado en `localStorage`, y español por defecto.
 
-### GSAP removido, usar CSS + IntersectionObserver
-GSAP ScrollTrigger no funciona en preview headless de Vercel/Claude Preview. Las animaciones de scroll se implementan con IntersectionObserver nativo que agrega clases CSS `.will-animate` → `.animated`. El hero usa CSS `@keyframes fadeUp`.
+## Reglas
 
-### Scroll animations solo en children, no en sections
-Si se aplica opacity:0 a una sección entera vía JS y el IntersectionObserver no dispara (headless, prefers-reduced-motion), todo el contenido queda invisible. Las secciones siempre son visibles; solo los cards/grids hijos usan el hook `useScrollAnimation({ children: true })`.
+1. **Quien contrata, primero.** Un promotor entiende en 10 segundos quién es Spin, lo oye y sabe cómo escribir. El efecto nunca estorba eso.
+2. **Fijo: el logo manuscrito y el rojo `#EB3E34`.** Tintas del sistema: rojo, negro cálido `#141210` y papel `#efe7d6`. Sobre rojo el texto de lectura va en negro; el papel sobre rojo solo en display grande.
+3. **No inventar nada.** Ni fechas, ni shows, ni cifras, ni prensa, ni años de los sencillos. Lo que falta está en `PENDING`.
+4. **Todo texto visible sale de `src/content.ts`** o de `ui.ts` si es etiqueta de interfaz. Sin raya (—) en texto visible. Tuteo, español neutro colombiano, y `/humanizalo` antes de publicar copy nuevo.
+5. **Sin eyebrows:** ninguna etiqueta pequeña sola encima de un título.
+6. **El sonido nunca arranca solo.** El player de Bandcamp se carga con `BandcampFacade` (clic para cargar).
+7. **Cambios de diseño se prueban primero en `../spin-lab` (propuesta C)** y se portan con paridad: capturas de página completa con movimiento reducido, lab contra `npm run build` de este repo, comparadas con `magick compare`.
 
-### Tailwind 4 con @theme (no tailwind.config.ts)
-Tailwind 4 usa `@theme` en CSS para definir tokens en lugar del archivo tailwind.config.ts. Los colores custom se definen como `--color-bg-primary`, `--color-accent`, etc. en globals.css.
+## Reglas técnicas
 
-### Single Page App (no router)
-Todas las secciones están en App.tsx como una sola página con anchor links. Smooth scroll vía JS en Navbar. No hay React Router.
+- **Scroll ligado: solo `transform`, `opacity` y `clip-path`.** Hover y transiciones tampoco animan padding, margin, width ni height.
+- **Switch de movimiento visible.** Apaga toda animación no esencial, incluido Lenis. Con `prefers-reduced-motion` no hay Lenis y el switch se oculta.
+- **Nada queda en `opacity: 0` esperando un observer.**
+- **Fotos en trama:** las de club usan `tone` y `dot={0.56}`; el `dot` por defecto (0.72) engorda la tinta y empasta los medios tonos. La versión de tono se genera con `magick <foto> -resize 1200x -colorspace Gray -clahe 12.5x12.5%+128+2.4 -sigmoidal-contrast 4x45%`. Debajo del canvas queda el `<img>` real con su `alt`; el canvas es `aria-hidden`.
+- **Accesibilidad:** contraste AA, enlace de salto primero, un solo `h1`, foco visible, menú móvil con Esc, 375 px sin scroll horizontal, objetivos táctiles de 44 px.
+- **Hooks y contextos van en su propio archivo `.ts`,** aparte de los componentes (regla de fast refresh del lint).
+- **Album id de Bandcamp** para embeds: se saca del HTML crudo con `curl` (atributo `data-tralbum`). WebFetch no sirve, pierde el JSON. Catálogo nuevo: volver a leer `mspin.bandcamp.com`, no actualizar a mano.
+- **El formulario no se prueba enviando:** se intercepta `/api/contact` en el navegador de pruebas. Un envío real le llega a Miguel.
 
-### Vercel serverless para contacto
-La API de contacto (api/contact.ts) usa @vercel/node types y llama a Resend. La env var `RESEND_API_KEY` debe estar configurada en Vercel.
+## Pendiente antes de pasar a `main`
 
-## Errores conocidos a evitar
-- **NO usar `gsap.set()` para initial state.** Deja elementos invisibles si la animación no dispara.
-- **NO aplicar useScrollAnimation a `<section>` directamente.** Solo a divs internos con `children: true`.
-- **Tailwind 4:** No existe `tailwind.config.ts`, toda la configuración va en CSS con `@theme`.
-- **Preview tool:** No soporta scroll ni IntersectionObserver. Verificar con `preview_snapshot` (accessibility tree) en lugar de screenshots para contenido below-the-fold.
-- **Git push:** Requiere SSH key configurada en GitHub. HTTPS no funciona sin token.
-- **Contenido en español:** Siempre usar tildes y caracteres correctos (á, é, í, ó, ú, ñ, ü). Pasar el contenido por /humanizalo para que suene natural y no a IA.
+- El inglés no es indexable: el idioma cambia en el navegador sobre la misma URL. Falta darle a cada idioma su dirección y generar la página ya armada al compilar (hoy el contenido se arma con JavaScript).
+- `api/contact.ts` mete nombre y mensaje en el HTML del correo sin escapar.
+- "Into Your Spell EP" sigue como pre-order en Bandcamp (se arregla en la cuenta, no en el código).
 
-## Estado actual del proyecto
-- Sitio completo y deployado en Vercel
-- Dominio djspin.co configurado (DNS apuntando a Vercel)
-- Logo Spin blanco integrado en nav, hero y footer
-- Playlist Deepsidency de SoundCloud embebida en sección Música
-- Formulario de contacto conectado a Resend
-- Bilingüe ES/EN funcional con toggle en navbar
-- **Pendiente:** Agregar favicon con logo Spin
+---
+
+# Histórico del sitio anterior (reemplazado por el diseño Cartel)
+
+Lo que sigue describe el sitio oscuro con vidrio que estuvo en producción hasta octubre de 2026. Sus instrucciones ya no aplican.
 
 ## Jornada 2026-06-01 — Sesión 1 de rediseño profundo
 

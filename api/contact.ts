@@ -26,7 +26,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       body: JSON.stringify({
         from: 'Spin Website <onboarding@resend.dev>',
         to: ['mspindj@gmail.com'],
-        subject: `[${subject.toUpperCase()}] ${name} — djspin.co`,
+        subject: `[${subject.toUpperCase()}] ${name} · djspin.co`,
         html: `
           <h2>${subject.toUpperCase()} inquiry from djspin.co</h2>
           <p><strong>Name:</strong> ${name}</p>
