@@ -5,3 +5,8 @@ dist
 
 # Backups locales de imágenes pre-WebP (no committear, 50MB)
 public/images/.originals/
+
+# Variables locales (llaves): nunca al repo
+.env
+.env.*
+!.env.example

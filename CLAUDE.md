@@ -6,7 +6,8 @@ Sitio de Spin (Miguel Espinosa). Diseño "Cartel": flyer de club a dos tintas, t
 
 - React 19 + Vite 8 + TypeScript 6. CSS plano (`src/site/cartel.css`, todo bajo `.pc`). Sin Tailwind, sin GSAP, sin WebGL.
 - Lenis para el scroll suave (solo con movimiento encendido). Fuentes self-hosted con `@fontsource-variable` (Big Shoulders y Schibsted Grotesk).
-- Contacto: `api/contact.ts` (función de Vercel) llama a Resend. Necesita `RESEND_API_KEY` en Vercel.
+- Contacto: `api/contact.ts` (función de Vercel) llama a Resend. Variables: `RESEND_API_KEY` (obligatoria, en Vercel para Production y Preview), `CONTACT_TO` y `CONTACT_FROM` (opcionales). El remitente por defecto es el de pruebas de Resend, que solo entrega al correo dueño de la cuenta de Resend.
+- En `npm run dev` la misma función corre sobre el servidor de Vite (plugin en `vite.config.ts`) con las variables de `.env.local` (plantilla en `.env.example`). Sin llave responde 500 y el formulario muestra el error.
 - Deploy: Vercel, auto-deploy desde `main` a djspin.co. Cada rama genera un preview.
 - Repo: `git@github.com:mspindj/djspin.co.git` (push por SSH).
 
@@ -47,13 +48,13 @@ npm run lint     # tiene que dar 0
 - **Nada toca `window`, `document` ni `location` durante el render,** solo en efectos o con guarda `typeof window`: el prerender corre en Node y un acceso directo rompe el build.
 - **Hooks y contextos van en su propio archivo `.ts`,** aparte de los componentes (regla de fast refresh del lint).
 - **Album id de Bandcamp** para embeds: se saca del HTML crudo con `curl` (atributo `data-tralbum`). WebFetch no sirve, pierde el JSON. Catálogo nuevo: volver a leer `mspin.bandcamp.com`, no actualizar a mano.
-- **El formulario no se prueba enviando:** se intercepta `/api/contact` en el navegador de pruebas. Un envío real le llega a Miguel.
+- **El formulario no se prueba enviando:** se intercepta `/api/contact` en el navegador de pruebas, o se sustituye `fetch` hacia `api.resend.com` al levantar Vite (`NODE_OPTIONS="--import mock.mjs"`). Un envío real le llega a Miguel. Si Resend rechaza, el motivo queda en los logs de la función (`contact: Resend respondió ...`).
 
 ## Pendiente antes de pasar a `main`
 
 - Antes de que cargue el JavaScript las fotos se ven en gris, sin trama (es el `<img>` de respaldo). Falta decidir si se ocultan hasta que la trama esté lista.
 - El `h1` trae dos composiciones del titular (ancha y angosta) y CSS muestra una: sin CSS el texto sale repetido.
-- `api/contact.ts` mete nombre y mensaje en el HTML del correo sin escapar.
+- Falta un envío real del formulario (hasta ahora solo se probó con Resend sustituido) y, para un remitente propio, verificar el dominio en Resend.
 - "Into Your Spell EP" sigue como pre-order en Bandcamp (se arregla en la cuenta, no en el código).
 
 ---
