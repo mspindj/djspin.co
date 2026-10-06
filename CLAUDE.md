@@ -1,6 +1,6 @@
 # CLAUDE.md: djspin.co
 
-Sitio de Spin (Miguel Espinosa). Diseño "Cartel": flyer de club a dos tintas, tipografía de cartel y fotos en trama de semitono. Nació como propuesta C en `../spin-lab` (lab local de tres propuestas, 06/10/2026) y este repo es un port fiel. En producción desde ese día. La crónica de cada jornada va en `Docs/journal/`, no aquí.
+Sitio de Spin (Miguel Espinosa). Diseño "Cartel": flyer de club a dos tintas, tipografía de cartel y fotos en trama de semitono. Nació como propuesta C en `../spin-lab` (repo privado `mspindj/spin-lab`, tres propuestas, 06/10/2026) y este repo es un port fiel. En producción desde ese día. La crónica de cada jornada va en `Docs/journal/`, no aquí.
 
 ## Stack
 
@@ -8,7 +8,7 @@ Sitio de Spin (Miguel Espinosa). Diseño "Cartel": flyer de club a dos tintas, t
 - Lenis para el scroll suave (solo con movimiento encendido). Fuentes self-hosted con `@fontsource-variable` (Big Shoulders y Schibsted Grotesk).
 - Contacto: `api/contact.ts` (función de Vercel) llama a Resend. Variables: `RESEND_API_KEY` (obligatoria, en Vercel para Production y Preview), `CONTACT_TO` y `CONTACT_FROM` (opcionales). Por defecto envía a `booking@djspin.co` desde `web@djspin.co`, lo que exige que `djspin.co` esté verificado en la cuenta de Resend de esa llave.
 - En `npm run dev` la misma función corre sobre el servidor de Vite (plugin en `vite.config.ts`) con las variables de `.env.local` (plantilla en `.env.example`). Sin llave responde 500 y el formulario muestra el error.
-- Deploy: Vercel, auto-deploy desde `main` a djspin.co. Cada rama genera un preview. **El proyecto de Vercel es `spin-website` (equipo maito-agency): es el que tiene el dominio y donde van las variables.** Existe un duplicado `djspin-co` conectado al mismo repo que también compila cada push; no sirve ningún dominio.
+- Deploy: Vercel, auto-deploy desde `main` a djspin.co. Cada rama genera un preview. **El proyecto de Vercel es `spin-website` (equipo maito-agency): es el que tiene el dominio y donde van las variables.** Es el único proyecto conectado a este repo (hubo un duplicado, `djspin-co`, borrado el 06/10/2026).
 - `main` no recibe commits directos: rama, pull request y merge.
 - Repo: `git@github.com:mspindj/djspin.co.git` (push por SSH).
 
@@ -56,7 +56,6 @@ npm run lint     # tiene que dar 0
 - Antes de que cargue el JavaScript las fotos se ven en gris, sin trama (es el `<img>` de respaldo). Falta decidir si se ocultan hasta que la trama esté lista.
 - El `h1` trae dos composiciones del titular (ancha y angosta) y CSS muestra una: sin CSS el texto sale repetido.
 - Falta un envío del formulario desde djspin.co (el real se hizo desde un preview el 06/10/2026 y llegó a `booking@djspin.co`).
-- "Into Your Spell EP" sigue como pre-order en Bandcamp (se arregla en la cuenta, no en el código).
 
 ---
 
