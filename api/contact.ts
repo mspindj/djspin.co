@@ -3,9 +3,10 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 // Formulario de bookings de djspin.co. Envía con Resend.
 // Variables (Vercel, y .env.local para probar en local):
 //   RESEND_API_KEY  obligatoria
-//   CONTACT_TO      destino. Por defecto mspindj@gmail.com
-//   CONTACT_FROM    remitente. Por defecto el de pruebas de Resend, que SOLO entrega al correo
-//                   dueño de la cuenta de Resend. Para otro destino hay que verificar un dominio.
+//   CONTACT_TO      destino. Por defecto booking@djspin.co
+//   CONTACT_FROM    remitente. Por defecto web@djspin.co: exige que djspin.co esté verificado en la
+//                   cuenta de Resend de la llave. El remitente de pruebas (onboarding@resend.dev)
+//                   solo entrega al correo dueño de la cuenta.
 const SUBJECTS: Record<string, string> = { booking: 'Booking', press: 'Prensa', brand: 'Curaduría sonora', other: 'Otro' }
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
@@ -45,8 +46,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: process.env.CONTACT_FROM || 'Spin Website <onboarding@resend.dev>',
-        to: [process.env.CONTACT_TO || 'mspindj@gmail.com'],
+        from: process.env.CONTACT_FROM || 'Spin Website <web@djspin.co>',
+        to: [process.env.CONTACT_TO || 'booking@djspin.co'],
         subject: `[${subject}] ${name} · djspin.co`,
         reply_to: email,
         text: `${subject} desde djspin.co\n\nNombre: ${name}\nEmail: ${email}\n\n${message}`,

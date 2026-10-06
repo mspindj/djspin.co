@@ -6,7 +6,7 @@ Sitio de Spin (Miguel Espinosa). Diseño "Cartel": flyer de club a dos tintas, t
 
 - React 19 + Vite 8 + TypeScript 6. CSS plano (`src/site/cartel.css`, todo bajo `.pc`). Sin Tailwind, sin GSAP, sin WebGL.
 - Lenis para el scroll suave (solo con movimiento encendido). Fuentes self-hosted con `@fontsource-variable` (Big Shoulders y Schibsted Grotesk).
-- Contacto: `api/contact.ts` (función de Vercel) llama a Resend. Variables: `RESEND_API_KEY` (obligatoria, en Vercel para Production y Preview), `CONTACT_TO` y `CONTACT_FROM` (opcionales). El remitente por defecto es el de pruebas de Resend, que solo entrega al correo dueño de la cuenta de Resend.
+- Contacto: `api/contact.ts` (función de Vercel) llama a Resend. Variables: `RESEND_API_KEY` (obligatoria, en Vercel para Production y Preview), `CONTACT_TO` y `CONTACT_FROM` (opcionales). Por defecto envía a `booking@djspin.co` desde `web@djspin.co`, lo que exige que `djspin.co` esté verificado en la cuenta de Resend de esa llave.
 - En `npm run dev` la misma función corre sobre el servidor de Vite (plugin en `vite.config.ts`) con las variables de `.env.local` (plantilla en `.env.example`). Sin llave responde 500 y el formulario muestra el error.
 - Deploy: Vercel, auto-deploy desde `main` a djspin.co. Cada rama genera un preview.
 - Repo: `git@github.com:mspindj/djspin.co.git` (push por SSH).
