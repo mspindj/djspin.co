@@ -12,7 +12,7 @@ Sitio de Spin (Miguel Espinosa). Diseño "Cartel": flyer de club a dos tintas, t
 
 ```bash
 npm run dev      # localhost:5173 (en Claude Desktop: preview_start "spin-dev")
-npm run build    # tsc -b && vite build
+npm run build    # tsc, vite build, build SSR y scripts/prerender.mjs
 npm run lint     # tiene que dar 0
 ```
 
@@ -22,7 +22,9 @@ npm run lint     # tiene que dar 0
 - `src/site/`: el sitio. `index.tsx` (página), `Halftone.tsx` (fotos en trama, canvas 2D), `Fit.tsx` (línea ajustada al ancho), `useSlides.ts` (titulares que se deslizan), `ui.ts` (microcopy de interfaz, listado en `MICROCOPY.md`), `cartel.css`.
 - `src/shared/`: `motion.tsx` y `useMotion.ts` (switch de movimiento), `SmoothScroll.tsx` y `useLenis.ts`, `BandcampFacade.tsx`, `useBookingForm.ts`.
 - `public/img/`: fotos en webp. `public/img/tone/`: versiones en gris con contraste local, solo para calcular la trama. `public/covers/`: las 16 portadas.
-- Idioma: `?lang=es|en` en la URL, después lo guardado en `localStorage`, y español por defecto.
+- **Idioma por dirección:** `/` es español y `/en` es inglés. El toggle son enlaces reales que cambian la dirección sin recargar (`history.pushState`). `?lang=en` es la forma vieja: se respeta y se corrige la dirección.
+- **Prerender al compilar** (`scripts/prerender.mjs` + `src/entry-server.tsx`): escribe `dist/index.html` y `dist/en/index.html` con el contenido ya armado, su `<html lang>` y su cabecera. La cabecera de cada idioma (título, descripción, canonical, hreflang, Open Graph, JSON-LD) sale de `src/seo.ts`; el bloque entre `seo:start` y `seo:end` de `index.html` solo se ve en `npm run dev`. El navegador monta la app encima con `createRoot`, no hidrata.
+- `public/sitemap.xml` lista las dos direcciones con sus alternates.
 
 ## Reglas
 
@@ -32,7 +34,8 @@ npm run lint     # tiene que dar 0
 4. **Todo texto visible sale de `src/content.ts`** o de `ui.ts` si es etiqueta de interfaz. Sin raya (—) en texto visible. Tuteo, español neutro colombiano, y `/humanizalo` antes de publicar copy nuevo.
 5. **Sin eyebrows:** ninguna etiqueta pequeña sola encima de un título.
 6. **El sonido nunca arranca solo.** El player de Bandcamp se carga con `BandcampFacade` (clic para cargar).
-7. **Cambios de diseño se prueban primero en `../spin-lab` (propuesta C)** y se portan con paridad: capturas de página completa con movimiento reducido, lab contra `npm run build` de este repo, comparadas con `magick compare`.
+7. **El lab no tiene direcciones por idioma ni prerender** (allá el toggle son botones y el idioma va por `?lang=`). Esa parte vive solo aquí.
+8. **Cambios de diseño se prueban primero en `../spin-lab` (propuesta C)** y se portan con paridad: capturas de página completa con movimiento reducido, lab contra `npm run build` de este repo, comparadas con `magick compare`. Diferencias de menos de 0,3% en los bordes de los titulares ajustados (`Fit`) son esperables: su tamaño final varía hasta 0,25 px según cuándo cargue la fuente.
 
 ## Reglas técnicas
 
@@ -41,13 +44,15 @@ npm run lint     # tiene que dar 0
 - **Nada queda en `opacity: 0` esperando un observer.**
 - **Fotos en trama:** las de club usan `tone` y `dot={0.56}`; el `dot` por defecto (0.72) engorda la tinta y empasta los medios tonos. La versión de tono se genera con `magick <foto> -resize 1200x -colorspace Gray -clahe 12.5x12.5%+128+2.4 -sigmoidal-contrast 4x45%`. Debajo del canvas queda el `<img>` real con su `alt`; el canvas es `aria-hidden`.
 - **Accesibilidad:** contraste AA, enlace de salto primero, un solo `h1`, foco visible, menú móvil con Esc, 375 px sin scroll horizontal, objetivos táctiles de 44 px.
+- **Nada toca `window`, `document` ni `location` durante el render,** solo en efectos o con guarda `typeof window`: el prerender corre en Node y un acceso directo rompe el build.
 - **Hooks y contextos van en su propio archivo `.ts`,** aparte de los componentes (regla de fast refresh del lint).
 - **Album id de Bandcamp** para embeds: se saca del HTML crudo con `curl` (atributo `data-tralbum`). WebFetch no sirve, pierde el JSON. Catálogo nuevo: volver a leer `mspin.bandcamp.com`, no actualizar a mano.
 - **El formulario no se prueba enviando:** se intercepta `/api/contact` en el navegador de pruebas. Un envío real le llega a Miguel.
 
 ## Pendiente antes de pasar a `main`
 
-- El inglés no es indexable: el idioma cambia en el navegador sobre la misma URL. Falta darle a cada idioma su dirección y generar la página ya armada al compilar (hoy el contenido se arma con JavaScript).
+- Antes de que cargue el JavaScript las fotos se ven en gris, sin trama (es el `<img>` de respaldo). Falta decidir si se ocultan hasta que la trama esté lista.
+- El `h1` trae dos composiciones del titular (ancha y angosta) y CSS muestra una: sin CSS el texto sale repetido.
 - `api/contact.ts` mete nombre y mensaje en el HTML del correo sin escapar.
 - "Into Your Spell EP" sigue como pre-order en Bandcamp (se arregla en la cuenta, no en el código).
 

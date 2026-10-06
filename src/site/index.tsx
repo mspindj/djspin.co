@@ -15,6 +15,7 @@ import Halftone from './Halftone'
 import Fit from './Fit'
 import { useSlides } from './useSlides'
 import { UI } from './ui'
+import { pathFor } from '../seo'
 
 const RED = '#EB3E34'
 const INK = '#141210'
@@ -176,9 +177,16 @@ export default function Cartel({ locale, setLocale, t }: ProtoProps) {
   const langToggle = (
     <div className="pc-lang" role="group" aria-label={ui.lang}>
       {(['es', 'en'] as Locale[]).map((l) => (
-        <button key={l} type="button" aria-pressed={locale === l} lang={l} onClick={() => setLocale(l)}>
+        <a
+          key={l} href={pathFor(l)} hrefLang={l} lang={l} aria-current={locale === l ? 'true' : undefined}
+          onClick={(e) => {
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+            e.preventDefault()
+            setLocale(l)
+          }}
+        >
           {l.toUpperCase()}
-        </button>
+        </a>
       ))}
     </div>
   )

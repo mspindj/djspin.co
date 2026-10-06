@@ -8,9 +8,9 @@ const readUserOn = () => {
   try { return sessionStorage.getItem(KEY) !== 'off' } catch { return true }
 }
 
-/** El sitio solo corre en el navegador: las dos preferencias se leen al montar, sin esperar un efecto. */
+/** Las dos preferencias se leen al montar, sin esperar un efecto. En el prerender (sin window) el movimiento queda encendido. */
 export function MotionProvider({ children }: { children: ReactNode }) {
-  const [reduced, setReduced] = useState(() => window.matchMedia(QUERY).matches)
+  const [reduced, setReduced] = useState(() => typeof window !== 'undefined' && window.matchMedia(QUERY).matches)
   const [userOn, setUserOnState] = useState(readUserOn)
 
   useEffect(() => {
