@@ -17,6 +17,16 @@ const clean = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().sli
 const oneLine = (s: string) => s.replace(/[\r\n]+/g, ' ')
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // DIAGNÓSTICO TEMPORAL (quitar): solo fuera de producción, solo NOMBRES de variables, nunca valores.
+  if (req.method === 'GET' && process.env.VERCEL_ENV !== 'production') {
+    const names = Object.keys(process.env).filter((k) => /resend|contact|mail|spin/i.test(k))
+    return res.status(200).json({
+      vercelEnv: process.env.VERCEL_ENV ?? null,
+      hasKey: !!process.env.RESEND_API_KEY,
+      keyLength: process.env.RESEND_API_KEY?.length ?? 0,
+      names: names.map((k) => JSON.stringify(k)),
+    })
+  }
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
