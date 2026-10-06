@@ -1,0 +1,6 @@
+/* Solo el reset. Todo el diseño vive en src/site/cartel.css, bajo .pc. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; }
+body { margin: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+img, canvas, svg, iframe { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
